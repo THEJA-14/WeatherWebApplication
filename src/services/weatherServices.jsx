@@ -51,7 +51,7 @@ const formatFiveDayForecast = (data) => {
 
   data.list.forEach((item) => {
     const dt = item.dt;
-    const date = DateTime.fromSeconds(dt + timezone);
+    const date = DateTime.fromSeconds(dt).toUTC().plus({ seconds: timezone });
     const time = date.toFormat("ccc");
     const hour = date.toFormat("hh:mm a");
 
@@ -72,7 +72,7 @@ const formatFiveDayForecast = (data) => {
     }
   });
 
-  return { timezone, daily, hourly };
+  return { timezone, daily, hourly, list: data.list }; // list included for high/low correction
 };
 
 const getFormattedWeatherData = async (searchParams) => {
@@ -85,7 +85,35 @@ const getFormattedWeatherData = async (searchParams) => {
     units: searchParams.units,
   }).then(formatFiveDayForecast);
 
-  return { ...currentWeather, ...forecastWeather };
+
+const today = DateTime.fromSeconds(currentWeather.dt)
+.toUTC()
+.plus({ seconds: currentWeather.timezone })
+.toFormat("yyyy-MM-dd");
+
+const todayTemps = forecastWeather.list
+.filter((item) => {
+  const itemDate = DateTime.fromSeconds(item.dt)
+    .toUTC()
+    .plus({ seconds: currentWeather.timezone })
+    .toFormat("yyyy-MM-dd");
+  return itemDate === today;
+})
+.map((item) => item.main.temp);
+
+// Guard against empty arrays to avoid Math.max(...[]) = -Infinity
+const derivedHigh =
+todayTemps.length > 0 ? Math.max(...todayTemps) : currentWeather.temp_max;
+const derivedLow =
+todayTemps.length > 0 ? Math.min(...todayTemps) : currentWeather.temp_min;
+
+return {
+...currentWeather,
+...forecastWeather,
+temp_max: derivedHigh,
+temp_min: derivedLow,
+};
+
 };
 
 const formatToLocalTime = (
