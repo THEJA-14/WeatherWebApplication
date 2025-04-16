@@ -1,7 +1,7 @@
 
 import fetch from "node-fetch";
 
-const API_KEY = process.env.WEATHER_API_KEY;
+const API_KEY = d1ada702efe5e6d4916d130ede8f5933;
 
 export const getWeatherByCity = async (city) => {
   const res = await fetch(
