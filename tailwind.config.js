@@ -5,7 +5,6 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        ganglion: ['Ganglion', 'sans-serif'],
         grefal: ['Grefal Display', 'serif'],
       },
     },

@@ -15,12 +15,6 @@ body {
   background: linear-gradient(90deg, #014f86 0%, #2c7da0 100%);
 }
 
-@font-face {
-  font-family: 'Ganglion';
-  src: url('C:\Users\ASUS\Desktop\the-last\WeatherApp\weather\public\fonts\Ganglion.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
 
 @font-face {
   font-family: 'Grefal Display';
