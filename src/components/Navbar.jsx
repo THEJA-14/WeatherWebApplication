@@ -7,9 +7,10 @@ const Navbar = () => {
   return (
     <nav className="w-full bg-gradient-to-r from-[#01497c] to-[#2a6f97] shadow-md py-4">
       <div className="container mx-auto px-4 flex flex-col sm:flex-row items-center justify-between">
-      <div className="text-white text-3xl font-grefal mb-2 sm:mb-0 cursor-pointer"onClick={() => navigate("/")}>
+      <div className="text-white text-3xl mb-2 sm:mb-0 cursor-pointer" onClick={() => navigate("/")}>
   WeatherApp
 </div>
+
 
 
         <div className="flex space-x-6 text-white text-md font-medium">

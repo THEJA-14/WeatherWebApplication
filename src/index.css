@@ -15,11 +15,4 @@ body {
   background: linear-gradient(90deg, #014f86 0%, #2c7da0 100%);
 }
 
-@font-face {
-  font-family: 'GrefalDisplay';
-  src: url('/fonts/GrefalDisplay.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-
 
